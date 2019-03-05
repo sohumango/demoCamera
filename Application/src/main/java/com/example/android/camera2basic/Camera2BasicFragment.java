@@ -74,6 +74,10 @@ import java.util.concurrent.TimeUnit;
 public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
+    private  boolean m_bfront = false;
+    public Camera2BasicFragment( boolean bfront) {
+        m_bfront = bfront;
+    }
     /**
      * Conversion from screen rotation to JPEG orientation.
      */
@@ -413,8 +417,8 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    public static Camera2BasicFragment newInstance() {
-        return new Camera2BasicFragment();
+    public static Camera2BasicFragment newInstance(boolean bfront) {
+        return new Camera2BasicFragment(bfront);
     }
 
     @Override
@@ -500,8 +504,14 @@ public class Camera2BasicFragment extends Fragment
                 Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
                 if (facing != null ) {
                     //change to use front camera
-                    if(facing != CameraCharacteristics.LENS_FACING_FRONT){
-                        continue;
+                    if (m_bfront) {
+                        if(facing != CameraCharacteristics.LENS_FACING_FRONT){
+                            continue;
+                        }
+                    } else{
+                        if(facing == CameraCharacteristics.LENS_FACING_FRONT){
+                            continue;
+                        }
                     }
                 }
 

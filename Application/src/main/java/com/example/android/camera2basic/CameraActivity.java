@@ -25,11 +25,18 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
         if (null == savedInstanceState) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, Camera2BasicFragment.newInstance())
+                    .replace(R.id.front_camera, Camera2BasicFragment.newInstance(true))
                     .commit();
         }
+        if (null == savedInstanceState) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.back_camera, Camera2BasicFragment.newInstance(false))
+                    .commit();
+        }
+
     }
 
 }
