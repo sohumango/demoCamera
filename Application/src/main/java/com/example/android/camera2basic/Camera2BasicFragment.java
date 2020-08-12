@@ -75,9 +75,8 @@ public class Camera2BasicFragment extends Fragment
         implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private  boolean m_bfront = false;
-    public Camera2BasicFragment( boolean bfront) {
-        m_bfront = bfront;
-    }
+    public  Camera2BasicFragment(){}
+
     /**
      * Conversion from screen rotation to JPEG orientation.
      */
@@ -418,12 +417,18 @@ public class Camera2BasicFragment extends Fragment
     }
 
     public static Camera2BasicFragment newInstance(boolean bfront) {
-        return new Camera2BasicFragment(bfront);
+        Camera2BasicFragment frag =  new Camera2BasicFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("isFront", bfront);
+        frag.setArguments(args);
+        return  frag;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        assert getArguments() != null;
+        m_bfront = getArguments().getBoolean("isFront");
         return inflater.inflate(R.layout.fragment_camera2_basic, container, false);
     }
 

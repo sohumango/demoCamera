@@ -50,8 +50,4 @@ public class SampleTests extends ActivityInstrumentationTestCase2<CameraActivity
         assertNotNull("mTestActivity is null", mTestActivity);
     }
 
-    /**
-    * Add more tests below.
-    */
-
 }
